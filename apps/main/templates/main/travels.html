@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <meta charset="utf-8">
+          <title>Travel Dashboard</title>
+          {% load static %}
+          <link rel="stylesheet" href="{% static 'main/stylesheet.css' %}" media="screen" title="no title"  charset="utf-8">
+     </head>
+     <body>
+          <div class="page_header">
+               <a href="/main/logout">Logout</a>
+          </div>
+          <div class="main_body">
+               <h1>Hello, {{ request.session.current_user }}</h1>
+               <br>
+               <h2>Your Trip Schedules</h2>
+               <table border=1 padding=10>
+                    <thead>
+                         <th>DESTINATION</th>
+                         <th>TRAVEL START DATE</th>
+                         <th>TRAVEL END DATE</th>
+                         <th>DESCRIPTION</th>
+                         <th>HOST</th>
+                    </thead>
+                    {% for trip in users_trips %}
+                    <tr>
+                         <td><a href="/travels/destination/{{trip.id}}">{{ trip.destination }}</a></td>
+                         <td>{{ trip.start_date }}</td>
+                         <td>{{ trip.end_date }}</td>
+                         <td>{{ trip.description }}</td>
+                         <td>{{ trip.created_by.name }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% for rsvp in current_traveler.rsvpd.all %}
+                    <tr>
+                         <td><a href="/travels/destination/{{rsvp.trip.id}}">{{ rsvp.trip.destination }}</a></td>
+                         <td>{{ rsvp.trip.start_date }}</td>
+                         <td>{{ rsvp.trip.end_date }}</td>
+                         <td>{{ rsvp.trip.description }}</td>
+                         <td>{{ rsvp.trip.created_by.name }}</td>
+                    </tr>
+                    {% endfor %}
+               </table>
+               <br>
+               <h2>Other User's Travel Plans</h2>
+               <table border=1 padding=10>
+                    <thead>
+                         <th>DESTINATION</th>
+                         <th>TRAVEL START DATE</th>
+                         <th>TRAVEL END DATE</th>
+                         <th>HOST</th>
+                         <th>DESCRIPTION</th>
+                         <th>WANT TO JOIN?</th>
+                    </thead>
+                    {% for plan in all_plans %}
+                    <tr>
+                         <td><a href="/travels/destination/{{plan.id}}">{{ plan.destination }}</a></td>
+                         <td>{{ plan.start_date }}</td>
+                         <td>{{ plan.end_date }}</td>
+                         <td>{{ plan.created_by.name }}</td>
+                         <td>{{ plan.description}}</td>
+                         <td><a href="/travels/destination/join/{{plan.id}}">Join</a></td>
+                    </tr>
+                    {% endfor %}
+               </table>
+          </div>
+          <div class="page_footer">
+               <a href="/travels/add">Add Travel Plan</a>
+          </div>
+     </body>
+</html>

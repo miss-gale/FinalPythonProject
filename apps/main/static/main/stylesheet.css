@@ -1,0 +1,38 @@
+*{
+     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+     margin: 5px;
+     padding: 5px;
+}
+
+fieldset{
+     width: 400px;
+}
+
+.main_body{
+     width: 920px;
+}
+
+.registration{
+     width: 420px;
+     display: inline-block;
+     vertical-align: top;
+}
+
+.login{
+     width: 420px;
+     display: inline-block;
+}
+
+.page_header{
+     width: 920px;
+     text-align: right;
+}
+
+.page_footer{
+     width: 920px;
+     text-align: right;
+}
+
+.error_messages{
+     color: red;
+}

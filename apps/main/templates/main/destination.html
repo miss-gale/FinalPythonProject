@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <meta charset="utf-8">
+          <title>Destination</title>
+          {% load static %}
+          <link rel="stylesheet" href="{% static 'main/stylesheet.css' %}" media="screen" title="no title"  charset="utf-8">
+     </head>
+     <body>
+          <div class="page_header">
+               <a href="/">Home</a>
+               <a href="/travels">Dashboard</a>
+               <a href="/main/logout">Logout</a>
+          </div>
+          <div class="main_body">
+               <h1>{{ this_destination.destination }}</h1>
+               <ul>
+                    <li>Description:  {{ this_destination.description }}</li>
+                    <li>Travel Date From:  {{ this_destination.start_date }}</li>
+                    <li>Travel Date To:  {{ this_destination.end_date }}</li>
+                    <li>Created By:  {{ this_destination.created_by.name }}</li>
+               </ul>
+               <h2>Friends joining the trip:</h2>
+               <ul>
+                    {% for friend in this_destination.travelers_joined.all %}
+                    <li>{{ friend.traveler.name }}</li>
+                    {% endfor %}
+               </ul>
+          </div>
+     </body>
+</html>
